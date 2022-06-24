@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/tasse_forfettario.iml" filepath="$PROJECT_DIR$/tasse_forfettario.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/tasse_forfettario_android.iml" filepath="$PROJECT_DIR$/android/tasse_forfettario_android.iml" />
+    </modules>
+  </component>
+</project>
