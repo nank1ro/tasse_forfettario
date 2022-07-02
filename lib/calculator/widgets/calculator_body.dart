@@ -70,100 +70,119 @@ class _CalculatorBodyState extends ConsumerState<CalculatorBody> {
                     '''* Il seguente tool non è stato sviluppato da un commercialista, le informazioni qui riportate potrebbero non essere corrette.''',
                   ),
                 ),
-                const SizedBox(height: 40),
-                DropdownListTile<int>(
-                  value: selectedYear,
-                  labelText: "Seleziona l'anno per cui vuoi calcolare le tasse",
-                  options: aliquotaInpsPerAnno.keys,
-                  onChanged: (value) {
-                    if (value == null) return;
-                    setState(() => selectedYear = value);
-                  },
-                ),
-                const SizedBox(height: 16),
-                DoubleNumTextField(
-                  labelText: 'Totale entrate',
-                  textEdititingController: totalEarningsController,
-                  hintText: '30000€',
-                ),
-                const SizedBox(height: 16),
-                DropdownListTile<int>(
-                  value: selectedCoefficiente,
-                  labelText: 'Seleziona il coefficiente di redditività',
-                  options: coefficientiRedditivita,
-                  formatDisplayValue: (value) => '$value%',
-                  onChanged: (value) {
-                    if (value == null) return;
-                    setState(() => selectedCoefficiente = value);
-                  },
-                ),
-                const SizedBox(height: 16),
-                DoubleNumTextField(
-                  labelText:
-                      """Totale acconti INPS $selectedYear versati nell'anno precedente""",
-                  textEdititingController: accontiPrecInpsController,
-                  hintText: '0.00€',
-                ),
-                const SizedBox(height: 16),
-                DoubleNumTextField(
-                  labelText:
-                      """Totale acconti Imposta Sostitutiva $selectedYear versati nell'anno precedente""",
-                  textEdititingController:
-                      accontiPrecImpostaSostitutivaController,
-                  hintText: '0.00€',
-                ),
-                const SizedBox(height: 16),
-                DropdownListTile<Aliquota>(
-                  value: aliquotaImpostaSostitutiva.value,
-                  labelText: "Seleziona l'aliquota dell'imposta sostitutiva",
-                  options: Aliquota.values,
-                  formatDisplayValue: (value) {
-                    switch (value) {
-                      case Aliquota.nuovaAttivita:
-                        return '5% nuova attività (per i primi 5 anni)';
-                      case Aliquota.vecchiaAttivita:
-                        return '15%';
-                    }
-                  },
-                  onChanged: (value) {
-                    if (value == null) return;
-                    aliquotaImpostaSostitutiva.value = value;
-                  },
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: const StadiumBorder(),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 60,
-                      vertical: 20,
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.all(
+                    20,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                      width: 2,
                     ),
                   ),
-                  onPressed: () {
-                    ref.read(calculatorProvider.notifier).calculate(
-                          year: selectedYear,
-                          earnings: double.parse(totalEarningsController.text),
-                          coefficienteRedditivita: selectedCoefficiente,
-                          aliquota: aliquotaImpostaSostitutiva.value,
-                          totaleAccontiINPSPrecedenti: accontiPrecInpsController
-                                  .text.isEmpty
-                              ? 0.0
-                              : double.parse(accontiPrecInpsController.text),
-                          totaleAccontiImpostaSostitutivaPrecedenti:
-                              accontiPrecImpostaSostitutivaController
-                                      .text.isEmpty
-                                  ? 0.0
-                                  : double.parse(
-                                      accontiPrecImpostaSostitutivaController
-                                          .text,
-                                    ),
-                        );
-                  },
-                  child: Text(
-                    'Calcola',
-                    style: context.textStyles.bodyText1.bold.copyWith(
-                      color: Colors.white,
-                    ),
+                  child: Column(
+                    children: [
+                      DropdownListTile<int>(
+                        value: selectedYear,
+                        labelText:
+                            "Seleziona l'anno per cui vuoi calcolare le tasse",
+                        options: aliquotaInpsPerAnno.keys,
+                        onChanged: (value) {
+                          if (value == null) return;
+                          setState(() => selectedYear = value);
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      DoubleNumTextField(
+                        labelText: 'Totale entrate',
+                        textEdititingController: totalEarningsController,
+                        hintText: '30000€',
+                      ),
+                      const SizedBox(height: 16),
+                      DropdownListTile<int>(
+                        value: selectedCoefficiente,
+                        labelText: 'Seleziona il coefficiente di redditività',
+                        options: coefficientiRedditivita,
+                        formatDisplayValue: (value) => '$value%',
+                        onChanged: (value) {
+                          if (value == null) return;
+                          setState(() => selectedCoefficiente = value);
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      DoubleNumTextField(
+                        labelText:
+                            """Totale acconti INPS $selectedYear versati nell'anno precedente""",
+                        textEdititingController: accontiPrecInpsController,
+                        hintText: '0.00€',
+                      ),
+                      const SizedBox(height: 16),
+                      DoubleNumTextField(
+                        labelText:
+                            """Totale acconti Imposta Sostitutiva $selectedYear versati nell'anno precedente""",
+                        textEdititingController:
+                            accontiPrecImpostaSostitutivaController,
+                        hintText: '0.00€',
+                      ),
+                      const SizedBox(height: 16),
+                      DropdownListTile<Aliquota>(
+                        value: aliquotaImpostaSostitutiva.value,
+                        labelText:
+                            "Seleziona l'aliquota dell'imposta sostitutiva",
+                        options: Aliquota.values,
+                        formatDisplayValue: (value) {
+                          switch (value) {
+                            case Aliquota.nuovaAttivita:
+                              return '5% nuova attività (per i primi 5 anni)';
+                            case Aliquota.vecchiaAttivita:
+                              return '15%';
+                          }
+                        },
+                        onChanged: (value) {
+                          if (value == null) return;
+                          aliquotaImpostaSostitutiva.value = value;
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: const StadiumBorder(),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 60,
+                            vertical: 20,
+                          ),
+                        ),
+                        onPressed: () {
+                          ref.read(calculatorProvider.notifier).calculate(
+                                year: selectedYear,
+                                earnings:
+                                    double.parse(totalEarningsController.text),
+                                coefficienteRedditivita: selectedCoefficiente,
+                                aliquota: aliquotaImpostaSostitutiva.value,
+                                totaleAccontiINPSPrecedenti:
+                                    accontiPrecInpsController.text.isEmpty
+                                        ? 0.0
+                                        : double.parse(
+                                            accontiPrecInpsController.text),
+                                totaleAccontiImpostaSostitutivaPrecedenti:
+                                    accontiPrecImpostaSostitutivaController
+                                            .text.isEmpty
+                                        ? 0.0
+                                        : double.parse(
+                                            accontiPrecImpostaSostitutivaController
+                                                .text,
+                                          ),
+                              );
+                        },
+                        child: Text(
+                          'Calcola',
+                          style: context.textStyles.bodyText1.bold.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Consumer(
