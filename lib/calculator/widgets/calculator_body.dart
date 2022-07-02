@@ -67,7 +67,7 @@ class _CalculatorBodyState extends ConsumerState<CalculatorBody> {
                         .copyWith(color: Colors.black),
                   ),
                   subtitle: const Text(
-                    '''* Il seguente tool non è stato sviluppato da un commercialista, le informazioni qui riportate potrebbero non essere corrette. Per avere la certezza delle tasse previste chiedere al proprio commercialista di fiducia.''',
+                    '''* Il seguente tool non è stato sviluppato da un commercialista, le informazioni qui riportate potrebbero non essere corrette.''',
                   ),
                 ),
                 const SizedBox(height: 40),
