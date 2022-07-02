@@ -1,2 +1,3 @@
-# tasse_forfettario
- Calcolatore tasse regime forfettario
+# Calcolatore tasse regime forfettario
+
+Provo l'app direttamente da https://nank1ro.github.io/tasse-forfettario
