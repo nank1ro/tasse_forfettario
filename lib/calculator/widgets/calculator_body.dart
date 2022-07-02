@@ -84,7 +84,7 @@ class _CalculatorBodyState extends ConsumerState<CalculatorBody> {
                 DoubleNumTextField(
                   labelText: 'Totale entrate',
                   textEdititingController: totalEarningsController,
-                  hintText: "Inserisci l'importo",
+                  hintText: '30000€',
                 ),
                 const SizedBox(height: 16),
                 DropdownListTile<int>(
@@ -113,18 +113,18 @@ class _CalculatorBodyState extends ConsumerState<CalculatorBody> {
                   hintText: '0.00€',
                 ),
                 const SizedBox(height: 16),
-                DropdownButton<Aliquota>(
+                DropdownListTile<Aliquota>(
                   value: aliquotaImpostaSostitutiva.value,
-                  items: Aliquota.values
-                      .map(
-                        (aliquota) => DropdownMenuItem(
-                          value: aliquota,
-                          child: Text(
-                            '${aliquota.percentage}%',
-                          ),
-                        ),
-                      )
-                      .toList(),
+                  labelText: "Seleziona l'aliquota dell'imposta sostitutiva",
+                  options: Aliquota.values,
+                  formatDisplayValue: (value) {
+                    switch (value) {
+                      case Aliquota.nuovaAttivita:
+                        return '5% nuova attività (per i primi 5 anni)';
+                      case Aliquota.vecchiaAttivita:
+                        return '15%';
+                    }
+                  },
                   onChanged: (value) {
                     if (value == null) return;
                     aliquotaImpostaSostitutiva.value = value;
