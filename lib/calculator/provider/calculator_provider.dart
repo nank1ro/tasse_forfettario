@@ -40,7 +40,13 @@ class Calculator extends StateNotifier<TasseResult?> {
     final aliquotaInpsAnno = aliquotaInpsPerAnno[year]!;
     final saldoInps = imponibile * (aliquotaInpsAnno / 100);
 
-    final totaleAccontiINPS = saldoInps * .8;
+    final aliquotaInpsAnnoSuccessivo = aliquotaInpsPerAnno.containsKey(year + 1)
+        ? aliquotaInpsPerAnno[year + 1]!
+        : aliquotaInpsAnno + 0.25;
+    final saldoInpsAnnoSuccessivo =
+        imponibile * (aliquotaInpsAnnoSuccessivo / 100);
+
+    final totaleAccontiINPS = saldoInpsAnnoSuccessivo * .8;
     final accontoPrimaRataINPS = totaleAccontiINPS / 2;
     final accontoSecondaRataINPS = totaleAccontiINPS / 2;
 
