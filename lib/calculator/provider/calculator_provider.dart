@@ -35,12 +35,10 @@ class Calculator extends StateNotifier<TasseResult?> {
     double totaleAccontiImpostaSostitutivaPrecedenti = 0,
   }) {
     final imponibile = earnings * (coefficienteRedditivita / 100);
-    final saldoImpostaSostitutiva = imponibile * (aliquota.percentage / 100) -
-        totaleAccontiImpostaSostitutivaPrecedenti;
+    final saldoImpostaSostitutiva = imponibile * (aliquota.percentage / 100);
 
     final aliquotaInpsAnno = aliquotaInpsPerAnno[year]!;
-    final saldoInps =
-        imponibile * (aliquotaInpsAnno / 100) - totaleAccontiINPSPrecedenti;
+    final saldoInps = imponibile * (aliquotaInpsAnno / 100);
 
     final totaleAccontiINPS = saldoInps * .8;
     final accontoPrimaRataINPS = totaleAccontiINPS / 2;
@@ -50,8 +48,10 @@ class Calculator extends StateNotifier<TasseResult?> {
     final accontoSecondaRataImpostaSostitutiva = saldoImpostaSostitutiva / 2;
 
     state = TasseResult(
-      saldoContributiINPS: saldoInps.round(),
-      saldoImpostaSostitutiva: saldoImpostaSostitutiva.round(),
+      saldoContributiINPS: (saldoInps - totaleAccontiINPSPrecedenti).round(),
+      saldoImpostaSostitutiva:
+          (saldoImpostaSostitutiva - totaleAccontiImpostaSostitutivaPrecedenti)
+              .round(),
       accontoPrimaRataINPS: accontoPrimaRataINPS.round(),
       accontoSecondaRataINPS: accontoSecondaRataINPS.round(),
       accontoPrimaRataImpostaSostitutiva:
